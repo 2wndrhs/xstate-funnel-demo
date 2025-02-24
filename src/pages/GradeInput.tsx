@@ -3,13 +3,14 @@ import { Check, ChevronDown } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useStudentStore } from '../stores';
 
 type Grade = 0 | 1 | 2 | 3 | 4;
 
 const grades = [1, 2, 3, 4] as const;
 
 const GradeInput = () => {
-  const [grade, setGrade] = useState(0);
+  const { department, admissionYear, grade, setGrade } = useStudentStore();
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
@@ -19,6 +20,22 @@ const GradeInput = () => {
   };
 
   const handleNextClick = () => {
+    console.log('student', {
+      department,
+      admissionYear,
+      grade,
+    });
+
+    // Some API Call
+    // fetch('https://api.example.com/student', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     department,
+    //     admissionYear,
+    //     grade,
+    //   }),
+    // });
+
     navigate('/timetable');
   };
 

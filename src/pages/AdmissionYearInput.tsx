@@ -3,11 +3,12 @@ import { Check, ChevronDown } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useStudentStore } from '../stores';
 
 const admissionYears = [25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15] as const;
 
 const AdmissionYearInput = () => {
-  const [admissionYear, setAdmissionYear] = useState(0);
+  const { admissionYear, setAdmissionYear } = useStudentStore();
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 

@@ -3,6 +3,7 @@ import { Check } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useStudentStore } from '../stores';
 
 const departments = [
   '차세대반도체학과',
@@ -17,7 +18,7 @@ const departments = [
 ] as const;
 
 const DepartmentInput = () => {
-  const [department, setDepartment] = useState('');
+  const { department, setDepartment } = useStudentStore();
   const [matchingDepartments, setMatchingDepartments] = useState<string[]>([]);
   const navigate = useNavigate();
 
