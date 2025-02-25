@@ -2,7 +2,6 @@ import * as Popover from '@radix-ui/react-popover';
 import { Check } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
 
 const departments = [
   '차세대반도체학과',
@@ -16,10 +15,13 @@ const departments = [
   '컴퓨터학부',
 ] as const;
 
-const DepartmentInput = () => {
+interface DepartmentInputProps {
+  onNext: (department: string) => void;
+}
+
+const DepartmentInput = ({ onNext }: DepartmentInputProps) => {
   const [department, setDepartment] = useState('');
   const [matchingDepartments, setMatchingDepartments] = useState<string[]>([]);
-  const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value.trim();
@@ -37,7 +39,7 @@ const DepartmentInput = () => {
   };
 
   const handleNextClick = () => {
-    navigate('/admissionYear');
+    onNext(department);
   };
 
   return (
