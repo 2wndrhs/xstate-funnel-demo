@@ -2,16 +2,18 @@ import * as Popover from '@radix-ui/react-popover';
 import { Check, ChevronDown } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
 
 type Grade = 0 | 1 | 2 | 3 | 4;
 
 const grades = [1, 2, 3, 4] as const;
 
-const GradeInput = () => {
-  const [grade, setGrade] = useState(0);
+interface GradeInputProps {
+  onNext: (grade: Grade) => void;
+}
+
+const GradeInput = ({ onNext }: GradeInputProps) => {
+  const [grade, setGrade] = useState<Grade>(0);
   const [showDropdown, setShowDropdown] = useState(false);
-  const navigate = useNavigate();
 
   const handleGradeSelect = (grade: Grade) => {
     setGrade(grade);
@@ -19,7 +21,7 @@ const GradeInput = () => {
   };
 
   const handleNextClick = () => {
-    navigate('/timetable');
+    onNext(grade);
   };
 
   return (
