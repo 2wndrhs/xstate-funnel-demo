@@ -1,7 +1,6 @@
-import { useMachine } from '@xstate/react';
 import { motion } from 'motion/react';
 import AppBar from '../components/AppBar';
-import { studentMachine } from '../machines/studentMachine';
+import { useStudentFunnel } from '../hooks/useStudentFunnel';
 import AdmissionYearInput from '../pages/AdmissionYearInput';
 import DepartmentInput from '../pages/DepartmentInput';
 import GradeInput from '../pages/GradeInput';
@@ -15,36 +14,40 @@ const progressMap: Record<string, number> = {
 };
 
 const Layout = () => {
-  const [snapshot, send] = useMachine(studentMachine);
-  const progress = progressMap[snapshot.value];
+  const [render, state] = useStudentFunnel();
+
+  const progress = progressMap[state];
 
   return (
     <div className="font-pretendard flex min-h-dvh flex-col py-6">
       <AppBar progress={progress} />
       <motion.div
-        key={snapshot.value}
+        key={state}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
         className="flex flex-1 flex-col"
       >
-        {snapshot.matches('학과입력') && (
-          <DepartmentInput
-            onNext={(department) => send({ type: '학과입력완료', payload: { department } })}
-          />
-        )}
-        {snapshot.matches('입학년도입력') && (
-          <AdmissionYearInput
-            onNext={(admissionYear) =>
-              send({ type: '입학년도입력완료', payload: { admissionYear } })
-            }
-          />
-        )}
-
-        {snapshot.matches('학년입력') && (
-          <GradeInput onNext={(grade) => send({ type: '학년입력완료', payload: { grade } })} />
-        )}
-        {snapshot.matches('시간표추천') && <TimetablePage />}
+        {render({
+          학과입력: ({ dispatch }) => (
+            <DepartmentInput
+              onNext={(department) => dispatch({ type: '학과입력완료', payload: { department } })}
+            />
+          ),
+          입학년도입력: ({ dispatch }) => (
+            <AdmissionYearInput
+              onNext={(admissionYear) =>
+                dispatch({ type: '입학년도입력완료', payload: { admissionYear } })
+              }
+            />
+          ),
+          학년입력: ({ dispatch }) => (
+            <GradeInput
+              onNext={(grade) => dispatch({ type: '학년입력완료', payload: { grade } })}
+            />
+          ),
+          시간표추천: () => <TimetablePage />,
+        })}
       </motion.div>
     </div>
   );
