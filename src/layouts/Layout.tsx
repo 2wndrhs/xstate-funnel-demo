@@ -29,16 +29,20 @@ const Layout = () => {
         className="flex flex-1 flex-col"
       >
         {snapshot.matches('학과입력') && (
-          <DepartmentInput onNext={(department) => send({ type: '학과입력완료', department })} />
+          <DepartmentInput
+            onNext={(department) => send({ type: '학과입력완료', payload: { department } })}
+          />
         )}
         {snapshot.matches('입학년도입력') && (
           <AdmissionYearInput
-            onNext={(admissionYear) => send({ type: '입학년도입력완료', admissionYear })}
+            onNext={(admissionYear) =>
+              send({ type: '입학년도입력완료', payload: { admissionYear } })
+            }
           />
         )}
 
         {snapshot.matches('학년입력') && (
-          <GradeInput onNext={(grade) => send({ type: '학년입력완료', grade })} />
+          <GradeInput onNext={(grade) => send({ type: '학년입력완료', payload: { grade } })} />
         )}
         {snapshot.matches('시간표추천') && <TimetablePage />}
       </motion.div>
