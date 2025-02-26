@@ -9,13 +9,13 @@ export const useStateMachineFunnel = <TMachine extends AnyStateMachine>(machine:
   type MachineEvent = EventFrom<TMachine>;
 
   type Component = (props: {
-    dispatch: (event: MachineEvent) => void;
+    send: (event: MachineEvent) => void;
     context: MachineSnapshot['context'];
   }) => ReactNode;
 
   const render = (components: Record<MachineSnapshot['value'], Component>) => {
     return components[snapshot.value as MachineSnapshot['value']]({
-      dispatch: send,
+      send: send,
       context: snapshot.context,
     });
   };

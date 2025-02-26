@@ -30,22 +30,20 @@ const Layout = () => {
         className="flex flex-1 flex-col"
       >
         {render({
-          학과입력: ({ dispatch }) => (
+          학과입력: ({ send }) => (
             <DepartmentInput
-              onNext={(department) => dispatch({ type: '학과입력완료', payload: { department } })}
+              onNext={(department) => send({ type: '학과입력완료', payload: { department } })}
             />
           ),
-          입학년도입력: ({ dispatch }) => (
+          입학년도입력: ({ send }) => (
             <AdmissionYearInput
               onNext={(admissionYear) =>
-                dispatch({ type: '입학년도입력완료', payload: { admissionYear } })
+                send({ type: '입학년도입력완료', payload: { admissionYear } })
               }
             />
           ),
-          학년입력: ({ dispatch }) => (
-            <GradeInput
-              onNext={(grade) => dispatch({ type: '학년입력완료', payload: { grade } })}
-            />
+          학년입력: ({ send }) => (
+            <GradeInput onNext={(grade) => send({ type: '학년입력완료', payload: { grade } })} />
           ),
           시간표추천: () => <TimetablePage />,
         })}
