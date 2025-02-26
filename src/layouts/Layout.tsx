@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import AppBar from '../components/AppBar';
-import { useStudentFunnel } from '../hooks/useStudentFunnel';
+import { useStateMachineFunnel } from '../hooks/useStateMachineFunnel';
+import { studentMachine } from '../machines/studentMachine';
 import AdmissionYearInput from '../pages/AdmissionYearInput';
 import DepartmentInput from '../pages/DepartmentInput';
 import GradeInput from '../pages/GradeInput';
@@ -14,7 +15,7 @@ const progressMap: Record<string, number> = {
 };
 
 const Layout = () => {
-  const [render, state] = useStudentFunnel();
+  const [render, state] = useStateMachineFunnel(studentMachine);
 
   const progress = progressMap[state];
 
