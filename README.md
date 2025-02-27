@@ -1,50 +1,32 @@
-# React + TypeScript + Vite
+# XState로 우아한 퍼널 만들기
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+유어슈 **'ROAD TO PRO : Discover 2025'** 에서 발표한 **XState로 우아한 퍼널 만들기**의 데모 코드입니다.
 
-Currently, two official plugins are available:
+## 브랜치 구성
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+각 브랜치에는 서로 다른 방식으로 구현된 퍼널(Funnel) 코드가 포함되어 있습니다.
 
-## Expanding the ESLint configuration
+- **global-state-funnel**: 페이지 4개와 전역 상태를 활용하여 구현한 퍼널
+- **local-state-funnel**: 한 페이지 내에서 지역 상태를 활용하여 구현한 퍼널
+- **xstate-funnel**: XState를 활용하여 구현한 퍼널
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 실행 방법
 
-- Configure the top-level `parserOptions` property like this:
+```bash
+# 레포지토리 클론
+git clone https://github.com/2wndrhs/xstate-funnel-demo.git
+cd xstate-funnel-demo
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+# 원하는 브랜치로 이동
+git checkout xstate-funnel
+
+# 패키지 설치
+pnpm install
+
+# 개발 서버 실행
+pnpm dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 세미나 발표 영상
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+[발표 영상 보러 가기](https://youtu.be/c9Ub-tDxzcw?si=d_0kWVv9GMvZ7hzM)
