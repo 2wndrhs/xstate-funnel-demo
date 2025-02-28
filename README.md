@@ -27,6 +27,10 @@ pnpm install
 pnpm dev
 ```
 
+## 블로그 글
+
+[XState로 우아한 퍼널 만들기](https://www.joonggon.me/posts/xstate-funnel)
+
 ## 세미나 발표 영상
 
 [발표 영상 보러 가기](https://youtu.be/c9Ub-tDxzcw?si=d_0kWVv9GMvZ7hzM)
